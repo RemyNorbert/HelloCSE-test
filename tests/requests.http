@@ -1,0 +1,85 @@
+@baseUrl = http://127.0.0.1:8000/api
+@authToken = Bearer 2|AZmIPv80h23YJmRLetPGcRD1c87wsHU7jXhOWut47e4229fb
+
+### Récupérer tous les profils actifs (Public)
+GET {{baseUrl}}/profiles
+Accept: application/json
+
+
+### Récupérer tous les profils actifs (Admin)
+GET {{baseUrl}}/profiles
+Accept: application/json
+Authorization: {{authToken}}
+
+
+### 📌 Créer un profil (image envoyée en multipart) (Admin)
+POST {{baseUrl}}/profiles
+Authorization: {{authToken}}
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/json
+
+--boundary
+Content-Disposition: form-data; name="firstName"
+
+Rémy
+
+--boundary
+Content-Disposition: form-data; name="lastName"
+
+NORBERT
+
+--boundary
+Content-Disposition: form-data; name="status"
+
+active
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="benzema-ballondor.jpg"
+Content-Type: image/jpeg
+
+< D:/Images/benzema-ballondor.jpg
+
+--boundary--
+
+
+
+### 📌 Modifier un profil (Admin)
+POST {{baseUrl}}/profiles/1?_method=PUT
+Authorization: {{authToken}}
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/json
+
+--boundary
+Content-Disposition: form-data; name="_method"
+
+PUT
+
+--boundary
+Content-Disposition: form-data; name="firstName"
+
+Rémy
+
+--boundary
+Content-Disposition: form-data; name="lastName"
+
+NORBERT
+
+--boundary
+Content-Disposition: form-data; name="status"
+
+active
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="benzema-ballondor.jpg"
+Content-Type: image/jpeg
+
+< D:/Images/benzema-ballondor.jpg
+
+--boundary--
+
+
+
+### 📌 Supprimer un profil (Admin)
+DELETE {{baseUrl}}/profiles/25
+Authorization: {{authToken}}
+Accept: application/json
